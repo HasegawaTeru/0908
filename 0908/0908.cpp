@@ -25,7 +25,7 @@ int main()
 		{
 		case GameState::Startup:
 			std::cout << "しばらくお待ちください" << std::endl;
-			std::cout << "何らかのキーを押して次に進む" << std::endl;
+			std::cout << "何らかのキーを押して次に進む" << std::endl << std::endl;
 
 			(void)_getch();
 			game_progression = GameState::Title;
@@ -34,7 +34,7 @@ int main()
 
 		case GameState::Title:
 			std::cout << "有限状態機械" << std::endl;
-			std::cout << "何らかのキーを押して次に進む" << std::endl;
+			std::cout << "何らかのキーを押して次に進む" << std::endl << std::endl;
 			
 			(void)_getch();
 			game_progression = GameState::MainMenu;
@@ -43,7 +43,7 @@ int main()
 
 		case GameState::MainMenu:
 			std::cout << "メインメニュー" << std::endl;
-			std::cout << "何らかのキーを押して戦う" << std::endl;
+			std::cout << "何らかのキーを押して戦う" << std::endl << std::endl;
 			
 			(void)_getch();
 			game_progression = GameState::InGame;
@@ -52,7 +52,7 @@ int main()
 
 		case GameState::InGame:
 			std::cout << "戦闘中" << std::endl;
-			std::cout << "何らかのキーを押して攻撃" << std::endl;
+			std::cout << "何らかのキーを押して攻撃" << std::endl << std::endl;
 
 			(void)_getch();
 			game_progression = GameState::Result;
@@ -61,7 +61,7 @@ int main()
 
 		case GameState::Result:
 			std::cout << "Result" << std::endl;
-			std::cout << "何らかのキーを押してタイトルに戻る" << std::endl;
+			std::cout << "何らかのキーを押してタイトルに戻る" << std::endl << std::endl;
 
 			(void)_getch();
 			game_progression = GameState::Startup;
