@@ -60,9 +60,9 @@ int main()
 	{
 		auto nextState = MainLoop();
 
-		if(nextState != GameState::Startup)
+		if(game_progression != nextState)
 		{
-			nextState = MainLoop();
+			game_progression = nextState;
 		}
 	}
 	return 0;
