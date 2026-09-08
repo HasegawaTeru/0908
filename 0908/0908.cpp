@@ -1,72 +1,68 @@
 ﻿#include <iostream>
-#include "conio.h"
 
-class GameState
+enum GameState
 {
-public:
-
-	enum GameProgression
-	{
-		Startup,
-		Title,
-		MainMenu,
-		InGame,
-		Result,
-	};
+	Startup,
+	Title,
+	MainMenu,
+	InGame,
+	Result,
 };
+
+GameState game_progression = GameState::Startup;
+
+GameState DoStartup()
+{
+	std::cout << "GameState::Startup" << std::endl;
+	return GameState::Title;
+}
+
+GameState DoTitle()
+{
+	std::cout << "GameState::Title" << std::endl;
+	return GameState::MainMenu;
+}
+
+GameState DoMainMenu()
+{
+	std::cout << "GameState::MainMenu" << std::endl;
+	return GameState::InGame;
+}
+
+GameState DoInGame()
+{
+	std::cout << "GameState::InGame" << std::endl;
+	return GameState::Result;
+}
+
+GameState DoResult()
+{
+	std::cout << "GameState::Result" << std::endl;
+	return GameState::Startup;
+}
+
+GameState MainLoop()
+{
+	switch (game_progression)
+	{
+	default: return GameState::Startup;
+	case GameState::Startup: return DoStartup();
+	case GameState::Title: return DoTitle();
+	case GameState::MainMenu: return DoMainMenu();
+	case GameState::InGame: return DoInGame();
+	case GameState::Result: return DoResult();
+	}
+}
 
 int main()
 {
-	GameState::GameProgression game_progression = GameState::Startup;
-
 	while (true)
 	{
-		switch (game_progression)
+		auto nextState = MainLoop();
+
+		if(nextState != GameState::Startup)
 		{
-		case GameState::Startup:
-			std::cout << "しばらくお待ちください" << std::endl;
-			std::cout << "何らかのキーを押して次に進む" << std::endl;
-
-			(void)_getch();
-			game_progression = GameState::Title;
-			
-			break;
-
-		case GameState::Title:
-			std::cout << "有限状態機械" << std::endl;
-			std::cout << "何らかのキーを押して次に進む" << std::endl;
-			
-			(void)_getch();
-			game_progression = GameState::MainMenu;
-			
-			break;
-
-		case GameState::MainMenu:
-			std::cout << "メインメニュー" << std::endl;
-			std::cout << "何らかのキーを押して戦う" << std::endl;
-			
-			(void)_getch();
-			game_progression = GameState::InGame;
-			
-			break;
-
-		case GameState::InGame:
-			std::cout << "戦闘中" << std::endl;
-			std::cout << "何らかのキーを押して攻撃" << std::endl;
-
-			(void)_getch();
-			game_progression = GameState::Result;
-			
-			break;
-
-		case GameState::Result:
-			std::cout << "Result" << std::endl;
-			std::cout << "何らかのキーを押してタイトルに戻る" << std::endl;
-
-			(void)_getch();
-			game_progression = GameState::Startup;
-
-			break;
+			nextState = MainLoop();
 		}
 	}
 	return 0;
