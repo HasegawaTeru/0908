@@ -46,7 +46,6 @@ int main()
 			std::cout << "何らかのキーを押して戦う" << std::endl;
 			
 			(void)_getch();
-			
 			game_progression = GameState::InGame;
 			
 			break;
