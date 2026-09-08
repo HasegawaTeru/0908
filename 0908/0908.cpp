@@ -1,55 +1,74 @@
 ﻿#include <iostream>
-#include "windows.h"
+#include "conio.h"
 
-enum GameProgression
+class GameState
 {
-	Startup,
-	Title,
-	MainMenu,
-	InGame,
-	Result,
+public:
+
+	enum GameProgression
+	{
+		Startup,
+		Title,
+		MainMenu,
+		InGame,
+		Result,
+	};
 };
 
 int main()
 {
-	GameProgression game_progression = Startup;
+	GameState::GameProgression game_progression = GameState::Startup;
 
-	switch(game_progression)
+	while (true)
 	{
-		case Startup:
+		switch (game_progression)
+		{
+		case GameState::Startup:
 			std::cout << "Startup" << std::endl;
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				game_progression = Title;
-				break;
-			}
-		case Title:
+			std::cout << "何らかのキーを押してください" << std::endl;
+
+			(void)_getch();
+			game_progression = GameState::Title;
+			
+			break;
+
+		case GameState::Title:
 			std::cout << "Title" << std::endl;
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				game_progression = MainMenu;
-				break;
-			}
-		case MainMenu:
+			std::cout << "何らかのキーを押してください" << std::endl;
+			
+			(void)_getch();
+			game_progression = GameState::MainMenu;
+			
+			break;
+
+		case GameState::MainMenu:
 			std::cout << "MainMenu" << std::endl;
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				game_progression = InGame;
-				break;
-			}
-		case InGame:
+			std::cout << "何らかのキーを押してください" << std::endl;
+			
+			(void)_getch();
+			
+			game_progression = GameState::InGame;
+			
+			break;
+
+		case GameState::InGame:
 			std::cout << "InGame" << std::endl;
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				game_progression = Result;
-				break;
-			}
-		case Result:
+			std::cout << "何らかのキーを押してください" << std::endl;
+
+			(void)_getch();
+			game_progression = GameState::Result;
+			
+			break;
+
+		case GameState::Result:
 			std::cout << "Result" << std::endl;
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				game_progression = Startup;
-				break;
-			}
+			std::cout << "何らかのキーを押してください" << std::endl;
+
+			(void)_getch();
+			game_progression = GameState::Startup;
+
+			break;
+		}
 	}
+	return 0;
 }
